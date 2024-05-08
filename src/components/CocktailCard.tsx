@@ -8,23 +8,13 @@ import _ from "lodash";
 type CocktailCard = {
   name: string;
   photo: string;
-  category: string;
-  type: string;
-  ingredient1?: string;
-  ingredient2?: string;
-  ingredient3?: string;
-  ingredient4?: string;
-  ingredient5?: string;
-  ingredient6?: string;
-  ingredient7?: string;
-  ingredient8?: string;
-  ingredient9?: string;
-  ingredient10?: string;
+  instructions: string;
 };
 
 export default function CocktailCard(props: CocktailCard) {
   const name = props.name;
   const photo = props.photo;
+  const instructions = props.instructions;
   //TODO: Collect ingredients
   //const ingredients = props.find(item => item.key.startsWith("ingredient"));
 
@@ -37,8 +27,7 @@ export default function CocktailCard(props: CocktailCard) {
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.type}
-            {props.category}
+            {instructions}
           </Typography>
         </CardContent>
       </CardActionArea>
