@@ -1,10 +1,8 @@
 import Nav from "../components/Nav.tsx";
-function Favourites() {
+export default function Favourites() {
   return (
     <>
       <Nav />
     </>
   );
 }
-
-export default Favourites;

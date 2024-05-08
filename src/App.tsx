@@ -7,7 +7,7 @@ import Home from "../src/pages/Home.tsx";
 import Favourites from "../src/pages/Favourites.tsx";
 import { Route, Routes } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Routes>
@@ -17,5 +17,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
