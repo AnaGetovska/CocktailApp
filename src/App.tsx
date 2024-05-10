@@ -6,6 +6,8 @@ import "@fontsource/roboto/700.css";
 import Home from "../src/pages/Home.tsx";
 import Favourites from "../src/pages/Favourites.tsx";
 import { Route, Routes } from "react-router-dom";
+import CocktailRecipe from "./pages/CocktailRecipe.tsx";
+import { Container } from "@mui/material";
 
 export default function App() {
   return (
@@ -13,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/favourites" element={<Favourites />} />
+        <Route path="/recipe/:id" element={<CocktailRecipe />} />
       </Routes>
     </div>
   );

@@ -1,35 +1,45 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Unstable_Grid2";
 import Logo from "./Logo.tsx";
+import RandomCocktailButton from "./RandomCocktailButton.tsx";
+import { ButtonGroup, Divider } from "@mui/material";
 
 function Nav() {
   return (
-    <Box bgcolor="primary.light" padding="1em">
+    <Box bgcolor="primary.dark" padding="1em">
       <nav>
         <Grid container>
           <Grid xs={4} margin="auto">
+            <ButtonGroup>
+              <Box display="flex" flexWrap="wrap">
+                <Button
+                  component={Link}
+                  to="/"
+                  color="primary"
+                  variant="text"
+                  aria-label="text primary button group"
+                >
+                  Home
+                </Button>
+                <Divider
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                  orientation="vertical"
+                />
+                <Button
+                  component={Link}
+                  to="/favourites"
+                  color="primary"
+                  variant="text"
+                  aria-label="text primary button group"
+                >
+                  Favourites
+                </Button>
+              </Box>
+            </ButtonGroup>
             <Grid>
-              <Button
-                component={Link}
-                to="/"
-                variant="contained"
-                color="primary"
-              >
-                Home
-              </Button>
-            </Grid>
-            <Grid>
-              <Button
-                component={Link}
-                to="/favourites"
-                variant="contained"
-                color="primary"
-              >
-                Favourites
-              </Button>
+              <RandomCocktailButton />
             </Grid>
           </Grid>
           <Grid xs={4}>

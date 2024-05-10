@@ -24,6 +24,7 @@ export default function useFetch<T>() {
 
     setIsLoading(false);
     setData(data);
+    return data;
   };
 
   return { isLoading, commonFetch, data };

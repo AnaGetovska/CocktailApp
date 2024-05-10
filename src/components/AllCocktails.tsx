@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Cocktail, Cocktails } from "../api/types";
+import { Cocktail } from "../api/types";
 import CocktailCard from "./CocktailCard";
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import { useInView } from "react-intersection-observer";
 
 type CocktailCard = {
@@ -21,7 +22,7 @@ export default function AllCocktails({ isLoading, hasFinished }: any) {
 
   const fetchCocktails = async ({ pageParam }: { pageParam: number }) => {
     const charset = "abcdefghijklmnopqrstuvwxyz";
-    const chunkSize = 100;
+    const chunkSize = 20;
     let currentBuffer = [...buffer];
     let currentIndex = queryIndex;
 
@@ -69,16 +70,15 @@ export default function AllCocktails({ isLoading, hasFinished }: any) {
     return sliceChunk();
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
-    useInfiniteQuery({
-      queryKey: ["1"],
-      queryFn: fetchCocktails,
-      initialPageParam: 0,
-      getNextPageParam: (lastPage, allPages) => {
-        const nextPage = lastPage.length ? allPages.length : "undefined";
-        return nextPage;
-      },
-    });
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ["1"],
+    queryFn: fetchCocktails,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = lastPage.length ? allPages.length : "undefined";
+      return nextPage;
+    },
+  });
 
   useEffect(() => {
     if (inView && !stopper) {
@@ -90,11 +90,14 @@ export default function AllCocktails({ isLoading, hasFinished }: any) {
     <>
       {_.flatten(data?.pages).map((d: Cocktail) => {
         return (
-          <CocktailCard
-            name={d.strDrink}
-            photo={d.strDrinkThumb}
-            instructions={d.strInstructions}
-          />
+          <Box>
+            <CocktailCard
+              id={d.idDrink}
+              name={d.strDrink}
+              photo={d.strDrinkThumb}
+              instructions={d.strInstructions}
+            />
+          </Box>
         );
       })}
       <Box ref={ref}>
@@ -104,11 +107,3 @@ export default function AllCocktails({ isLoading, hasFinished }: any) {
     </>
   );
 }
-// const properyNames = Object.getOwnPropertyNames(d);
-// const ingredientProps = _.filter(properyNames, (name) => {
-//   return name.startsWith("strIngredient") && (d as any)[name];
-// });
-// const ingredients = forEach(ingredientProps as string[], (p) => {
-//   return (d as any)[p];
-// });
-// console.log(ingredients);
